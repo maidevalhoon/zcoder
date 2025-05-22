@@ -25,4 +25,23 @@ const joinRoom=async(req,res)=>{
         return res.status(400).send('Error in joining the room!')
     }
 }
-module.exports={createRoom,joinRoom};
+
+const getAllRooms=async(req,res)=>{
+    try {
+        const rooms = await Room.find();
+        res.status(200).json(rooms);
+    } catch (err) {
+        res.status(400).send('Error in getting all rooms!')
+    }
+}
+
+const getRoomById=async(req,res)=>{
+    const query=req.query.q;
+    try{
+        const room=await Room.findById(query);
+        return res.status(200).json(room);
+    }catch(err){
+        return res.status(400).send('Error in fetching the room!')
+    }
+}
+module.exports={createRoom,joinRoom,getAllRooms,getRoomById};
