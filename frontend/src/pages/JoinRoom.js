@@ -1,18 +1,26 @@
-import React, { useState, useMemo,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { io } from 'socket.io-client';
+
 const JoinRoom = () => {
 
-  const socket = useMemo(() => {
-    return io("http://localhost:5000", {
-      withCredentials: true,
-    });
+  const [roomList, setRoomList] = useState(null);
+
+  useEffect(() => {
+
+    const getAllrooms = async () => {
+      try {
+        const res = await axios.get('http://localhost:5000/api/room/getallrooms');
+        setRoomList(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    getAllrooms();
+
   }, [])
 
-  useEffect(()=>{
-    socket.on('welcomePrompt',(msg)=> console.log(msg));
-  },[socket])
-
+  
 
   const [roomName, setRoomName] = useState("");
   const [roomPassword, setRoomPassword] = useState("");
@@ -22,16 +30,29 @@ const JoinRoom = () => {
       console.log(res.data);
       setRoomName("");
       setRoomPassword("");
+      window.location.href=`/room?id=${res.data._id}`
     } catch (err) {
       console.log(err);
     }
   }
   return (
-    <div className='joinRoom_section'>
-      <input type='text' placeholder='Room Name' value={roomName} onChange={(e) => setRoomName(e.target.value)}></input>
-      <input type='text' placeholder='Room id' value={roomPassword} onChange={(e) => setRoomPassword(e.target.value)}></input>
-      <button onClick={() => handleJoinRoom()}>Join Room</button>
-    </div>
+    <React.Fragment>
+      <div className='joinRoom_section'>
+        <input type='text' placeholder='Room Name' value={roomName} onChange={(e) => setRoomName(e.target.value)}></input>
+        <input type='text' placeholder='Room id' value={roomPassword} onChange={(e) => setRoomPassword(e.target.value)}></input>
+        <button onClick={() => handleJoinRoom()}>Join Room</button>
+      </div>
+
+      <div className='room_display_section'>
+        {roomList && roomList.map((room, ind) => (
+          <div key={ind} className='room_display' style={{'marginBottom':'1rem'}}>
+            <h3>{room.roomName}</h3>
+            <p>{room.roomPassword}</p>
+          </div>
+        ))}
+      </div>
+    </React.Fragment>
+
   )
 }
 
