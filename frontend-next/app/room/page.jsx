@@ -3,12 +3,11 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import { io } from 'socket.io-client';
-import { useRouter } from 'next/navigation';
-
+import {  useSearchParams } from 'next/navigation'
 const Room = () => {
-    const location = useRouter();
-    const queryParams = new URLSearchParams(location.search);
-    const id = queryParams.get('id');
+   // const location = useRouter();
+    const searchParams = useSearchParams()
+    const id = searchParams.get('id');
     const [room, setRoom] = useState(null);
     const [postmsg, setPostMsg] = useState("");
 
@@ -32,7 +31,6 @@ const Room = () => {
 
     useEffect(() => {
         if (!socket) return;
-
         socket.emit('joinRoom', id);
         socket.on('welcomeMsg', (msg) => {
             console.log(msg);
@@ -40,8 +38,9 @@ const Room = () => {
         socket.on('getmessage', (msg) => console.log(msg));
 
         return () => {
-            socket.off('welcomeMsg');
-            socket.off('getmessage');
+            //socket.off('welcomeMsg');
+            //socket.off('getmessage');
+            socket.disconnect();
         };
     }, [socket, id]);
 
