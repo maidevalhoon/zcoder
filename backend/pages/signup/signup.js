@@ -9,11 +9,17 @@ app.post('/signup',async (req,res)=>{
     try {
         const {name,email,password,techstack,favlang,rating} =req.body;
         if(!email || !name || !password){
-           return res.status(400).send("All input is required");
+           return res.status(200).send({
+                success: false,
+                message: "All input is required",
+           });
         }
         const mailcheck=await user.findOne({email : email});
         if(mailcheck){
-            return res.status(400).send("Email already exists");
+            return res.status(200).send({
+                success: false,
+                message: "Email already exists",
+            });
         }
         const salt=await bcrypt.genSalt(10);
         const hashpassword=await bcrypt.hash(password,salt);
@@ -27,10 +33,9 @@ app.post('/signup',async (req,res)=>{
         }
         const newUser=new user(User);
         await newUser.save();
-        res.status(200).send("User registered successfully");
-        //token generation
-        const token=jwt.sign({_id:newUser._id},process.env.TOKEN_SECRET||"unknown",{
-            expiresIn:'1d',
+        res.status(200).send({
+            success: true,
+            message: "User created"
         });
     } catch (error) {
         console.log("something is wrong")
