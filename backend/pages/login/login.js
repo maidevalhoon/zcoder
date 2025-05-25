@@ -39,12 +39,18 @@ app.post("/login",async (req,res)=>{
         const User =await user.findOne({email:email});
         if(!User){
             console.error("User not exists");
-            return res.status(400).send("User not exists")
+            return res.status(200).send({
+                success: false,
+                message: "User not exists",
+            })
         }
         const validPass=await bcrypt.compare(password,User.password);
         if(!validPass){
             console.error("Invalid Password");
-            return res.status(400).send("Invalid Password")
+            return res.status(200).send({
+                success: false,
+                message: "Invalid Password",
+            })
         }
         const token=jwt.sign({_id:User._id},process.env.TOKEN_SECRET||"unknown",{
             expiresIn:'1d',
@@ -52,14 +58,19 @@ app.post("/login",async (req,res)=>{
         console.log(token);
         console.log(process.env.TOKEN_SECRET)
         console.log("User logged in successfully",User);
-        return res.status(200).json(User);
+        return res.status(200).json({
+            success: true,
+            message: "User logged in successfully",
+            token
+        });
     } catch (error) {
         console.error(error);
         return res.status(400).send("something went wrong, please try again later");
     }
 });
 
-app.get("/google", passport.authenticate("google", ["profile", "email"]));
+
+app.get("api/google", passport.authenticate("google", ["profile", "email"]));
 
 app.get(
     "/auth/google/callback",
@@ -86,7 +97,8 @@ app.get(
         })(req, res, next);
     }
 );
-app.get("/login/success",(req,res)=>{
+app.get("api/login/success",(req,res)=>{
+
     if (req.user) {
 		res.status(200).json({
 			message: "Successfully Loged In",
