@@ -1,3 +1,4 @@
+
 'use client'
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -25,6 +26,7 @@ export default function Home() {
     }
    getAuthUser();
   },[])
+
   return (
     <>
       <h1>Home Page</h1>

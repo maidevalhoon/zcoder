@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+
 import { Alert } from '@mui/material';
 const JoinRoom = () => {
 
@@ -9,11 +10,14 @@ const JoinRoom = () => {
   const [status,setAlertStatus]=useState(null);
   const [authUser, setAuthUser] = useState();
 
+
   useEffect(() => {
 
     const getAllrooms = async () => {
       try {
+
         const res = await axios.get('http://localhost:5050/api/room/getallrooms');
+
         setRoomList(res.data);
       } catch (err) {
         console.log(err);
@@ -21,6 +25,7 @@ const JoinRoom = () => {
     }
 
     getAllrooms();
+
     const getAuthUser = async () => {
       const token = window.sessionStorage.getItem('token');
       const instance = axios.create({
@@ -53,11 +58,14 @@ const JoinRoom = () => {
       window.location.href = `/room?id=${res.data._id}`
     } catch (err) {
       setAlertStatus('error');
+
+
       console.log(err);
     }
   }
   return (
     <React.Fragment>
+
     {status && <Alert className='fixed top-0' severity={status && status}>{status==='success'?"Room joined successfully! Redirecting...":"Error in joining the room!"}</Alert>}
       <div className='bg-black p-4 text-white w-full h-screen'>
         <p className='text-2xl'>Zcoder</p>
@@ -71,6 +79,7 @@ const JoinRoom = () => {
           ))}
         </div>
       </div>
+
 
     </React.Fragment>
 
