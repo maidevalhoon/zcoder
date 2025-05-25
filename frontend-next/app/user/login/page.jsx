@@ -17,7 +17,7 @@ const login = () => {
     // const[UserPassword,setUserPassword]=useState("");
     const handlelogin = async () => {
         try {
-            console.log(form);
+
             const res = await axios.post("http://localhost:5050/login", form);
             Cookies.set("token", res.data.token);
             window.sessionStorage.setItem('token', res.data.token);

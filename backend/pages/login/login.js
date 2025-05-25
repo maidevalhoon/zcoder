@@ -61,7 +61,10 @@ app.post("/login",async (req,res)=>{
         return res.status(200).json({
             success: true,
             message: "User logged in successfully",
-            token
+
+            token,
+            User
+
         });
     } catch (error) {
         console.error(error);
@@ -70,7 +73,8 @@ app.post("/login",async (req,res)=>{
 });
 
 
-app.get("api/google", passport.authenticate("google", ["profile", "email"]));
+app.get("/api/google", passport.authenticate("google", ["profile", "email"]));
+
 
 app.get(
     "/auth/google/callback",
@@ -97,7 +101,8 @@ app.get(
         })(req, res, next);
     }
 );
-app.get("api/login/success",(req,res)=>{
+app.get("/api/login/success",(req,res)=>{
+
 
     if (req.user) {
 		res.status(200).json({
