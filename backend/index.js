@@ -34,6 +34,7 @@ app.use(cors({
 app.use('/api/user',userRouter);
 app.use('/api/room',roomRouter);
 app.use('/api/home',auth,homeRouter);
+
 app.use('api/problem',ask);
 app.use(profile.app);
 app.use(home.app);
@@ -44,7 +45,6 @@ app.use(home.app);
 app.use(login.app);
 app.use(signup.app);
 connect();
-
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -60,6 +60,7 @@ const io=new Server(server,{
         methods:['GET', 'POST','PUT','DELETE'],
     }
 })
+
 
 io.on('connection',(socket)=>{
     //console.log(`${socket.id} connectd`);

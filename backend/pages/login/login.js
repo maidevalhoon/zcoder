@@ -69,6 +69,7 @@ app.post("/login",async (req,res)=>{
     }
 });
 
+
 app.get("api/google", passport.authenticate("google", ["profile", "email"]));
 
 app.get(
@@ -97,6 +98,7 @@ app.get(
     }
 );
 app.get("api/login/success",(req,res)=>{
+
     if (req.user) {
 		res.status(200).json({
 			message: "Successfully Loged In",
