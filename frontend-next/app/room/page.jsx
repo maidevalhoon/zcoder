@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState, useMemo, useRef } from 'react';
 import axios from 'axios';
 import { io } from 'socket.io-client';
@@ -7,12 +6,10 @@ import { useSearchParams } from 'next/navigation'
 const Room = () => {
     // const location = useRouter();
     const [authUser, setAuthUser] = useState();
-
     const searchParams = useSearchParams()
     const id = searchParams.get('id');
     const [room, setRoom] = useState(null);
     const [postmsg, setPostMsg] = useState("");
-
     const [msgList, setmsgList] = useState([null]);
     const [loading,setLoading]=useState(true);
     const chatRef = useRef(null);
@@ -24,13 +21,11 @@ const Room = () => {
                 setmsgList(res.data.message);
                 setRoom(res.data);
                 setLoading(false);
-
             } catch (error) {
                 console.error("Error fetching room data:", error);
             }
         };
         getRoom();
-
         const getAuthUser = async () => {
             const token = window.sessionStorage.getItem('token');
             const instance = axios.create({
@@ -55,7 +50,6 @@ const Room = () => {
 
     const socket = useMemo(() => {
         return io("http://localhost:5050", {
-
             withCredentials: true,
         });
     }, []);
@@ -66,9 +60,7 @@ const Room = () => {
         socket.on('welcomeMsg', (msg) => {
             console.log(msg);
         });
-
         socket.on('getmessage', (msg) => { setmsgList((prev) => [...prev, msg]); });
-
 
         return () => {
             //socket.off('welcomeMsg');
@@ -76,7 +68,6 @@ const Room = () => {
             socket.disconnect();
         };
     }, [socket, id]);
-
 
     useEffect(() => {
         chatRef.current?.scrollIntoView();
@@ -146,7 +137,6 @@ const Room = () => {
             </div>
 
         </>
-
 
     );
 };

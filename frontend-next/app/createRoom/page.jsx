@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react'
 import axios from 'axios';
-
 import Alert from '@mui/material/Alert';
 function CreateRoom() {
   const [roomName, setRoomName] = useState("");
@@ -33,7 +32,6 @@ function CreateRoom() {
         </div>
       </div>
     </>
-
 
   )
 }

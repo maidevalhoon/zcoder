@@ -1,12 +1,12 @@
-
 'use client'
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const [authUser,setAuthUser]=useState(null);
-  const token=window.sessionStorage.getItem('token');
   useEffect(()=>{
+    const token=window.sessionStorage.getItem('token');
+    if(token==null) window.location.href='/user/login';
     const getAuthUser=async()=>{
       const instance=axios.create({
         baseURL:'http://localhost:5050/api',
@@ -26,7 +26,6 @@ export default function Home() {
     }
    getAuthUser();
   },[])
-
   return (
     <>
       <h1>Home Page</h1>
