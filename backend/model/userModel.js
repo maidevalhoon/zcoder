@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
         required:true
     },
     techstack:{
-        type:String,
+        type:Array,
     },
     favlang:{
         type:String,
