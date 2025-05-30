@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
 import axios from 'axios';
 import { io } from 'socket.io-client';
+import Navbar from '../components/ui/Navbar';
 import { useSearchParams } from 'next/navigation'
 const Room = () => {
     // const location = useRouter();
@@ -28,6 +29,7 @@ const Room = () => {
         getRoom();
         const getAuthUser = async () => {
             const token = window.sessionStorage.getItem('token');
+           // console.log(token);
             const instance = axios.create({
                 baseURL: 'http://localhost:5050/api',
                 withCredentials: true,
@@ -96,9 +98,8 @@ const Room = () => {
 
     return (
         <>
+        <Navbar/>
             <div className='w-full h-fit bg-black text-white p-2'>
-                <h1 className='text-2xl'>Zcoder</h1>
-                <p>{authUser && authUser.name}</p>
                 <div className='w-full h-screen flex box-border'>
                     <div className='w-3/4 h-3/4 mt-8'>
                         <h2 className='text-xl'>{room && room.roomName}</h2>

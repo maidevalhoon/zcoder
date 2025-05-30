@@ -20,13 +20,13 @@ const login = () => {
     // const[UserPassword,setUserPassword]=useState("");
     const handlelogin = async () => {
         try {
-            //console.log(form);
+
             const res = await axios.post("http://localhost:5050/login", form);
-            Cookies.set("token", res.data.token);
-            window.sessionStorage.setItem('token', res.data.token);
-            console.log(res);
             if (res.data.success === true) {
-                setAlertOpt('success');
+
+                // Store the token in a secure manner
+                window.sessionStorage.setItem("token", res.data.token);
+
                 router.push("/");
             } else {
                 setAlertOpt('error');
@@ -101,7 +101,9 @@ const login = () => {
                             <p className="text-sm text-gray-500 text-center">
                                 Don't have an account?
                             </p>
-                            <Link href="/signup">
+
+                            <Link href="/user/signup">
+
                                 <button
                                     className="button relative bg-orange-500 text-white font-bold w-full py-2 px-4 rounded-2xl border-black border-2 focus:outline-none focus:shadow-outline"
                                     type="button"

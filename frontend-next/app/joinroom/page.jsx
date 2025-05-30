@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react'
+import Navbar from '../components/ui/Navbar';
 import axios from 'axios';
 import { Alert } from '@mui/material';
 const JoinRoom = () => {
@@ -59,8 +60,11 @@ const JoinRoom = () => {
   return (
     <React.Fragment>
     {status && <Alert className='fixed top-0' severity={status && status}>{status==='success'?"Room joined successfully! Redirecting...":"Error in joining the room!"}</Alert>}
+
+    <Navbar/>
       <div className='bg-black p-4 text-white w-full h-screen'>
-        <p className='text-2xl'>Zcoder</p>
+        <p className='text-2xl'>JoinRoom</p>
+
         <p className='mt-2'>Available Rooms:</p>
         <div className='w-full h-fit bg-slate-700 rounded-lg p-4'>
           {roomList && roomList.map((room, ind) => (

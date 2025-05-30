@@ -20,7 +20,7 @@ const middleware=require('./middleware/auth');
 dotenv.config();
 const profile = require('./pages/profile/profile');
 const ask = require('./pages/problem/problem')
-app.use(express.json());
+app.use(express.json());    
 app.use(express.urlencoded({ extended: false }));
 app.use(session({
     secret: process.env.TOKEN_SECRET,
@@ -35,10 +35,12 @@ app.use(cors({
 }))
 //app.use('/api/user',userRouter);
 app.use('/api/room',roomRouter);
-app.use('/api/home',auth,homeRouter);
+
+app.use('/api/home',homeRouter);
 app.use('/api/problem',ask);
 app.use('/api/msg',msgRouter);
-app.use(profile.app);
+// app.use(profile.app);
+
 app.use(home.app);
 // app.get('/status', verifyToken, (req, res) => {
 //     const user = users.find(u => u.id === req.userId);

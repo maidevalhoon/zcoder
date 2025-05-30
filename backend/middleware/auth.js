@@ -4,7 +4,7 @@ const user=require('../model/userModel')
 dotenv.config();
 
 const verifytoken = async(req,res,next)=>{
-    const token = req.headers.authorization;
+    const token = req.headers.authorization||req.headers['x-access-token'];
     //console.log(token);
     try {
         if(!token){
