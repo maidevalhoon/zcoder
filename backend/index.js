@@ -9,22 +9,18 @@ const auth=require('./middleware/auth');
 //const userRouter=require('./routes/userRoute');
 const roomRouter=require('./routes/roomRoute');
 const homeRouter=require('./routes/homeRoute');
-
 const msgRouter=require('./routes/msgRoute');
-
 const signup = require('./pages/signup/signup');
 const login = require('./pages/login/login');
 const home = require('./pages/home/home');
 const dotenv = require('dotenv');
 const passport = require("passport");
 const session = require('express-session');
-
 const middleware=require('./middleware/auth');
-
 dotenv.config();
 const profile = require('./pages/profile/profile');
 const ask = require('./pages/problem/problem')
-app.use(express.json());
+app.use(express.json());    
 app.use(express.urlencoded({ extended: false }));
 app.use(session({
     secret: process.env.TOKEN_SECRET,
@@ -39,12 +35,10 @@ app.use(cors({
 }))
 //app.use('/api/user',userRouter);
 app.use('/api/room',roomRouter);
-app.use('/api/home',auth,homeRouter);
-
+app.use('/api/home',homeRouter);
 app.use('/api/problem',ask);
 app.use('/api/msg',msgRouter);
-
-app.use(profile.app);
+// app.use(profile.app);
 app.use(home.app);
 // app.get('/status', verifyToken, (req, res) => {
 //     const user = users.find(u => u.id === req.userId);
@@ -52,7 +46,6 @@ app.use(home.app);
 //   });
 app.use(login.app);
 app.use(signup.app);
-
 app.get('/api/getAuth',middleware,(req,res)=>{
     if(req.user){
         return res.status(200).json(req.user);
@@ -62,7 +55,6 @@ app.get('/api/getAuth',middleware,(req,res)=>{
     }
 })
 connect();
-
 
 
 app.use(passport.initialize());
@@ -80,22 +72,19 @@ const io=new Server(server,{
     }
 })
 
-
 io.on('connection',(socket)=>{
     //console.log(`${socket.id} connectd`);
 
     socket.on('joinRoom',(room)=>{
-
+        //console.log(`${socket.id} has joined the room!`);
         socket.join(room);
         socket.to(room).emit('welcomeMsg',`${socket.id} has entered the chat`)
     })
-
 
     socket.on('newmessage',({msg,id})=>{
         //console.log(postmsg +`from ${socket.id}`);
         //console.log(msg);
         socket.to(id).emit('getmessage',msg);
-
     })
     socket.on('disconnect',()=>{
     })
