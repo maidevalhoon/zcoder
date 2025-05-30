@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -31,6 +32,18 @@ body {
     text-wrap: balance;
   }
 } */
+@layer utilities{
+
+}
+.text-small{
+  font-size:0.6em;
+}
+.text-2{
+  font-size:0.7em;
+}
+.text-1{
+  font-size:0.6em;
+}
 .backFill{
   position: relative;
 }
@@ -46,12 +59,12 @@ body {
   transform: scaleX(0) scaleY(0);
   transform-origin: -50% bottom;
   z-index: -1;
-  @apply rounded-2xl
+  border-radius: 1rem;
 }
 
 .backFill:hover::before{
   transition: transform 0.5s;
   transition-timing-function: cubic-bezier(0.5,1.6,.4,.7);
   transform: scaleX(1) scaleY(1);
-  @apply rounded-2xl
+  border-radius: 1rem;
 }
