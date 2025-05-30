@@ -1,3 +1,4 @@
+
 "use client"
 import Card from './components/ui/card';
 import axios from 'axios';
@@ -44,3 +45,4 @@ const Home = () => {
     )
 }
 export default auth(Home);
+
