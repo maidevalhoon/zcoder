@@ -20,13 +20,10 @@ const login = () => {
     // const[UserPassword,setUserPassword]=useState("");
     const handlelogin = async () => {
         try {
-            //console.log(form);
             const res = await axios.post("http://localhost:5050/login", form);
-            Cookies.set("token", res.data.token);
-            window.sessionStorage.setItem('token', res.data.token);
-            console.log(res);
             if (res.data.success === true) {
-                setAlertOpt('success');
+                // Store the token in a secure manner
+                window.localStorage.setItem("token", res.data.token);
                 router.push("/");
             } else {
                 setAlertOpt('error');

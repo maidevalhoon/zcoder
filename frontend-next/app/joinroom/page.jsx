@@ -22,7 +22,7 @@ const JoinRoom = () => {
 
     getAllrooms();
     const getAuthUser = async () => {
-      const token = window.sessionStorage.getItem('token');
+      const token = window.localStorage.getItem('token');
       const instance = axios.create({
           baseURL: 'http://localhost:5050/api',
           withCredentials: true,
