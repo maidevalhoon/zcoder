@@ -61,7 +61,9 @@ export default function AskForm() {
         const token = window.sessionStorage.getItem("token");
         console.log(form);
         try {
+
             const res = await axios.post('https://zcoder-zac7.onrender.com/api/problem/ask', form, {
+
                 headers: {
                     'Authorization': `${token}`
                 }
@@ -93,7 +95,9 @@ export default function AskForm() {
                     onChange={(e) => setForm({ ...form, title: e.target.value })}
                 />
                 <label htmlFor="default-input" className="caution text-violet-400 text-small mt-1">
+
                     Be specific and imagine you are asking a question to another person.
+
                 </label>
                 {warnings.title && <div className="text-red-500 text-xs font-semibold mt-1">{warnings.title}</div>}
             </div>

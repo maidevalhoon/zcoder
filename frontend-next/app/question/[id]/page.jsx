@@ -17,6 +17,7 @@ const QuestionPage = ({ params }) => {
             const token = window.sessionStorage.getItem("token");
             try {
                 const response = await axios.get(`https://zcoder-zac7.onrender.com/api/problem/${_id}`, {
+
                     headers: {
                         'Authorization': `${token}`,
                     },
