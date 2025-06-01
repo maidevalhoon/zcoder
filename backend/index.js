@@ -35,12 +35,10 @@ app.use(cors({
 }))
 //app.use('/api/user',userRouter);
 app.use('/api/room',roomRouter);
-
 app.use('/api/home',homeRouter);
 app.use('/api/problem',ask);
 app.use('/api/msg',msgRouter);
 // app.use(profile.app);
-
 app.use(home.app);
 // app.get('/status', verifyToken, (req, res) => {
 //     const user = users.find(u => u.id === req.userId);

@@ -12,7 +12,7 @@ const Room = () => {
     const [room, setRoom] = useState(null);
     const [postmsg, setPostMsg] = useState("");
     const [msgList, setmsgList] = useState([null]);
-    const [loading,setLoading]=useState(true);
+    const [loading, setLoading] = useState(true);
     const chatRef = useRef(null);
     useEffect(() => {
         const getRoom = async () => {
@@ -29,7 +29,7 @@ const Room = () => {
         getRoom();
         const getAuthUser = async () => {
             const token = window.sessionStorage.getItem('token');
-           // console.log(token);
+            // console.log(token);
             const instance = axios.create({
                 baseURL: 'http://localhost:5050/api',
                 withCredentials: true,
@@ -98,18 +98,20 @@ const Room = () => {
 
     return (
         <>
-        <Navbar/>
+            <Navbar />
             <div className='w-full h-fit bg-black text-white p-2'>
                 <div className='w-full h-screen flex box-border'>
                     <div className='w-3/4 h-3/4 mt-8'>
                         <h2 className='text-xl'>{room && room.roomName}</h2>
                         <div className='w-full h-full overflow-y-auto p-4 border-white  border-2 rounded-xl mb-[1rem]'>
-                           {!loading && msgList!==null ? msgList.map((msg, id) => (
-                                <div key={id} className={`bg-cyan-800 px-2 py-1 h-fit ${authUser && authUser.name===msg.sender.name?'ml-auto':''}  rounded-md mb-4 w-[calc(50%-2rem)] hover:bg-cyan-500`}>
-                                    <p className={` `}>{msg && msg.sender.name}</p>
-                                    <p style={{ 'wordWrap': 'break-word' }} className='w-full'>{msg && msg.content}</p>
-                                </div>
-                           )):''} 
+                            {!loading && msgList !== null ? msgList.map((msg, id) => (
+                                <>
+                                    <div key={id} className={`bg-cyan-800 px-2 py-1 h-fit ${authUser && authUser.name === msg.sender.name ? 'ml-auto rounded-s-xl rounded-b-xl' : 'rounded-e-xl rounded-es-xl'} leading-1.5  mb-4 w-[calc(50%-2rem)] hover:bg-cyan-500`}>
+                                        <p className={`text-sm font-semibold text-gray-900 dark:text-white capitalize `}>{msg && msg.sender.name}</p>
+                                        <p style={{ 'wordWrap': 'break-word' }} className='w-full text-sm font-normal py-2.5 text-gray-900 dark:text-white'>{msg && msg.content}</p>
+                                    </div>
+                                </>
+                            )) : ''}
                             {/*{msgList && msgList.map((msg, id) => (
                                 console.log(msg)
                             ))
@@ -121,7 +123,7 @@ const Room = () => {
                                 type='text'
                                 placeholder='type message'
                                 value={postmsg}
-                                className='text-black px-2 w-1/2 py-1  outline-none border-4 rounded-md focus:border-green-600 rounded-md mr-[1rem]'
+                                className='text-black px-2 w-1/2 py-1  outline-none border-4 rounded-md focus:border-green-600  mr-[1rem]'
                                 onChange={(e) => setPostMsg(e.target.value)}
                             />
                             <input className='bg-green-600 cursor-pointer hover:bg-green-800 px-4 py-1 rounded-md w-fit h-fit' type='submit' value='Post' />
@@ -129,7 +131,7 @@ const Room = () => {
                     </div>
                     <div className='w-1/4 h-3/4 mt-12 mx-[1rem] border-white border-2 rounded-lg overflow-y-auto p-2'>
                         <p>Room Members</p>
-                        {room && room.members.map((user,id)=>(
+                        {room && room.members.map((user, id) => (
                             <p key={id}>{user.name}</p>
                         ))}
                     </div>

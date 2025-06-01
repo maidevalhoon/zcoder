@@ -59,23 +59,22 @@ const JoinRoom = () => {
   }
   return (
     <React.Fragment>
+      <div className='bg-black h-screen'>
     {status && <Alert className='fixed top-0' severity={status && status}>{status==='success'?"Room joined successfully! Redirecting...":"Error in joining the room!"}</Alert>}
-
     <Navbar/>
-      <div className='bg-black p-4 text-white w-full h-screen'>
-        <p className='text-2xl'>JoinRoom</p>
-
-        <p className='mt-2'>Available Rooms:</p>
-        <div className='w-full h-fit bg-slate-700 rounded-lg p-4'>
+      <div className='dark:bg-black bg-gray-50 p-4 text-black dark:text-white w-full'>
+        <p className='text-3xl font-semibold '>Join Room</p>
+        <p className='mt-2 font-medium mb-2'>Available Rooms:</p>
+        <div className='w-full h-fit dark:bg-gray-800 bg-gray-200 border-stone-900 border dark:border-gray-300  rounded-lg p-4'>
           {roomList && roomList.map((room, ind) => (
             <div key={ind} className='room_display' style={{ 'marginBottom': '1rem' }}>
-              <h3>{room.roomName.toUpperCase()}</h3>
-              <button className='bg-green-600 px-2 py-1 rounded-md w-fit h-fit' onClick={() => handleJoinRoom(room)}>Join Room</button>
+              <h3 className='font-medium'>{room.roomName.toUpperCase()} :</h3>
+              <button type="button" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center me-2 mb-2 w-fit h-fit"onClick={() => handleJoinRoom(room)}>Join Room</button>
             </div>
           ))}
         </div>
       </div>
-
+  </div>
     </React.Fragment>
 
   )
