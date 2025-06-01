@@ -76,7 +76,7 @@ const SignUp = () => {
                 setPasswordMatch(false);
                 return;
             }
-            const res = await axios.post("http://localhost:5050/signup", form);
+            const res = await axios.post("https://zcoder-zac7.onrender.com/signup", form);
             if (res.data.success === true) {
                 setAlertOpt('success');
                 router.push("/user/login");
@@ -212,7 +212,7 @@ const SignUp = () => {
                             <button
                                 className="button relative bg-orange-500 text-white font-bold w-full py-2 px-4 rounded-2xl border-black border-2 focus:outline-none focus:shadow-outline"
                                 type="button"
-                                onClick={() => router.push("/signin")}
+                                onClick={() => router.push("/user/login")}
                             >
                                 LOG IN
                             </button>

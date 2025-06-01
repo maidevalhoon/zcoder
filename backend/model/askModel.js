@@ -1,8 +1,17 @@
 const mongoose = require('mongoose');
 const answerSchema=new mongoose.Schema({
-    user_id:String,
-    name:String,
-    answer:String,
+    user_id:{
+        type:String,
+        required:true,
+    },
+    name:{
+        type:String,
+        required:true,
+    },
+    answer:{
+        type:String,
+        required:true,
+    },
     date:{
         type:Date,
         default:Date.now,
@@ -23,7 +32,7 @@ const problemSchema=new mongoose.Schema({
     tag:{
         type: Array,
     },
-    answers:answerSchema,
+    answers:[answerSchema],
     platform:{
         type: String,
     },

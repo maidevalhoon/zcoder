@@ -47,7 +47,9 @@ body {
 .backFill{
   position: relative;
 }
-
+.align-center{
+  align-items: center;
+}
 .backFill::before{
   content: '';
   position: absolute;

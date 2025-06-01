@@ -8,12 +8,12 @@ const auth = (Component) => {
     const router = useRouter();
 
     useEffect(() => {
-      const token = window.localStorage.getItem("token");
+      const token = window.sessionStorage.getItem("token");
       if (!token) {
         router.push("/user/login");
       } else {
         axios
-          .get("http://localhost:5050/api/getAuth", {
+          .get("https://zcoder-zac7.onrender.com/api/getAuth", {
             headers: {
                 'Authorization': `${token}`,
             },
@@ -25,13 +25,13 @@ const auth = (Component) => {
             router.push("/user/login");
           });
       }
-    }, []);
+    }, [router]);
 
     if (loading) {
-      return <h1>Loading...</h1>;
+      return (<h1>Loading...</h1>);
     }
 
-    return <Component {...props} />;
+    return (<Component {...props} />);
   };
 
   return Auth;

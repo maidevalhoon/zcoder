@@ -7,7 +7,7 @@ import CodeEditorWindow from '../components/CodeEditorWindow'
 import OutputWindow from '../components/OutputWindow'
 import OutputDetails from '../components/OutputDetails'
 import CustomInput from '../components/CustomInput'
-
+import Navbar from '../components/ui/Navbar';
 import axios from "axios";
 
 
@@ -78,7 +78,7 @@ const EditorPage = () => {
             .catch((err) => {
                 let error = err.response ? err.response.data : err;
                 // get error status
-                let status = err.response.status;
+                let status = err.response ? err.response.status:err;
                 console.log("status", status);
                 if (status === 429) {
                     console.log("too many requests", status);
@@ -134,58 +134,62 @@ const EditorPage = () => {
 
 
     return (
+        <React.Fragment>
+        <Navbar/>
         <div className='h-fit'>
-            <div className="flex md:flex-row flex-col items-center">
-                <div className="px-4 py-2">
-                    <LanguagesDropdown
-                        onSelectChange={onSelectChange}
-                        language={language}
-                    />
-                </div>
-                <div className="px-4 py-2">
-                    <ThemeDropdown
-                        handleThemeChange={handleThemeChange}
-                        theme={theme}
-                    />
-                </div>
+        <div className="flex md:flex-row flex-col items-center">
+            <div className="px-4 py-2">
+                <LanguagesDropdown
+                    onSelectChange={onSelectChange}
+                    language={language}
+                />
             </div>
-            <div className="flex md:flex-row flex-col space-x-4 items-start px-4 py-4">
-                <div className="flex flex-col w-full md:h-full justify-start items-end">
-                    <CodeEditorWindow
-                        code={code}
-                        onChange={onChange}
-                        language={language?.value}
-                        theme={theme?.value}
-                    />
-                </div>
-
-                <div className="right-container flex flex-shrink-0 w-[30%] flex-col">
-                    <OutputWindow
-                        outputDetails={outputDetails}
-                    />
-                    <div className="flex flex-col items-end">
-                        <CustomInput
-                            customInput={customInput}
-                            setCustomInput={setCustomInput}
-                        />
-                        <button
-                            onClick={handleCompile}
-                            disabled={!code}
-                            className={
-                                "backFill mt-5 border-2 border-black z-10 rounded-3xl shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow hover:text-white transition duration-500 bg-white flex-shrink-0"
-                                // !code ? "opacity-50" : ""
-                            }
-                        >
-                            {processing ? "Processing..." : "Compile and Execute"}
-                        </button>
-                    </div>
-                    {outputDetails &&
-                        <OutputDetails
-                            outputDetails={outputDetails}
-                        />}
-                </div>
+            <div className="px-4 py-2">
+                <ThemeDropdown
+                    handleThemeChange={handleThemeChange}
+                    theme={theme}
+                />
             </div>
         </div>
+        <div className="flex md:flex-row flex-col space-x-4 items-start px-4 py-4">
+            <div className="flex flex-col w-full md:h-full justify-start items-end">
+                <CodeEditorWindow
+                    code={code}
+                    onChange={onChange}
+                    language={language?.value}
+                    theme={theme?.value}
+                />
+            </div>
+
+            <div className="right-container flex flex-shrink-0 w-[30%] flex-col">
+                <OutputWindow
+                    outputDetails={outputDetails}
+                />
+                <div className="flex flex-col items-end">
+                    <CustomInput
+                        customInput={customInput}
+                        setCustomInput={setCustomInput}
+                    />
+                    <button
+                        onClick={handleCompile}
+                        disabled={!code}
+                        className={
+                            "backFill mt-5 border-2 border-black z-10 rounded-3xl shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow hover:text-white transition duration-500 bg-white flex-shrink-0"
+                            // !code ? "opacity-50" : ""
+                        }
+                    >
+                        {processing ? "Processing..." : "Compile and Execute"}
+                    </button>
+                </div>
+                {outputDetails &&
+                    <OutputDetails
+                        outputDetails={outputDetails}
+                    />}
+            </div>
+        </div>
+    </div>
+        </React.Fragment>
+        
     )
 }
 
