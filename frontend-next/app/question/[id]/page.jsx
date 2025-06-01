@@ -85,18 +85,16 @@ const QuestionPage = ({ params }) => {
         <div key={index} className="answer mt-4">
             <div className="des flex gap-2 text-center mt-auto">
                 <div className="answer__username font-medium text-sm dark:text-white text-black capitalize">{answer.name}</div>
-                <div className="answer__time text-2 text-gray-600 dark:tex-white flex text-center align-middle ">{answer.timeAgo_}</div>
+                <div className="answer__time text-2 text-gray-600 dark:text-white flex text-center align-middle ">{answer.timeAgo_}</div>
             </div>
-            <div className="answer__text mt-2 text-sm text-white font-light" style={{ whiteSpace: 'pre-wrap' }}>{answer.answer}</div>
-            <div className="line border-gray-200 border border-solid mx-16 my-5"></div>
+            <div className="answer__text mt-2 text-sm dark:text-white font-light" style={{ whiteSpace: 'pre-wrap' }}>{answer.answer}</div>
+            <hr className="h-px my-5 mx-12 bg-gray-200 border-0 dark:bg-gray-700 "></hr>
         </div>
     ));
-    // Replace the original code with updatedAnswers
-    // {no_of_answers > 0 && updatedAnswers}
     return (
         <React.Fragment>
         <Navbar />
-        <div className="bg-black text-white w-screen py-4 h-full">
+        <div className="dark:bg-black bg-gray-100 dark:text-white w-screen py-4 h-full text-black">
             <div className=" mx-14 h-auto">
             <div className="username font-medium text-sm dark:text-white text-black mt-8 capitalize">{name}</div>
             <h5 className="title text-2xl font-semibold mt-1">{title}</h5>

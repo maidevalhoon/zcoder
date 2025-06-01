@@ -212,9 +212,7 @@ const SignUp = () => {
                             <button
                                 className="button relative bg-orange-500 text-white font-bold w-full py-2 px-4 rounded-2xl border-black border-2 focus:outline-none focus:shadow-outline"
                                 type="button"
-
                                 onClick={() => router.push("/user/login")}
-
                             >
                                 LOG IN
                             </button>
@@ -227,6 +225,4 @@ const SignUp = () => {
     );
 };
 
-
 export default SignUp;
-

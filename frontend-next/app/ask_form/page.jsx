@@ -17,7 +17,7 @@ export default function AskForm() {
         question: '',
         tags: ''
     });
-
+   
     const handleTagInput = (e) => {
         if (e.key === 'Enter' && e.target.value !== '') {
             if (tags.length < 5) {
@@ -80,8 +80,8 @@ export default function AskForm() {
     return (
         <>
         <Navbar />
-        <div className="px-10 py-5 bg-black text-white" >
-            <div className="heading text-3xl font-bold mb-3">Ask Question</div>
+        <div className="px-10 py-5 bg-gray-100 dark:bg-black dark:text-white" >
+            <div className="heading text-3xl font-bold mb-3 dark:text-white">Ask Question</div>
             <div className="question-title mb-6 mt-5">
                 <label htmlFor="default-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                     Question Title <span className="star text-red-600 text-sm">*</span>
