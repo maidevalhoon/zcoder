@@ -13,7 +13,9 @@ const Testareaanswer = ({_id}) => {
     const userdetails=async()=>{
         const token = window.sessionStorage.getItem("token");
         try {
-            const res = await axios.get("http://localhost:5050/api/getAuth", {
+
+            const res = await axios.get("https://zcoder-zac7.onrender.com/api/getAuth", {
+
                 headers: {
                     'Authorization': `${token}`,
                 },
@@ -25,7 +27,9 @@ const Testareaanswer = ({_id}) => {
         }
     }
     userdetails();
-},[]);
+
+},[addAnswer]);
+
     const handleanswer = async () => {
         const token = window.sessionStorage.getItem("token");
         try {
@@ -33,7 +37,9 @@ const Testareaanswer = ({_id}) => {
                 alert("Please enter the answer first");
                 return;
             }
-            const res = await axios.post(`http://localhost:5050/api/problem/${_id}/answer`, addAnswer, {
+
+            const res = await axios.post(`https://zcoder-zac7.onrender.com/api/problem/${_id}/answer`, addAnswer, {
+
                 headers: {
                     'Authorization': `${token}`,
                 },

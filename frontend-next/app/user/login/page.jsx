@@ -7,7 +7,7 @@ import Link from 'next/link'
 import Cookies from "js-cookie";
 import { Alert } from "@mui/material";
 // import { cookies } from "next/headers";
-const login = () => {
+const Login = () => {
     const [form, setForm] = useState({
         email: "",
         password: "",
@@ -20,7 +20,9 @@ const login = () => {
     // const[UserPassword,setUserPassword]=useState("");
     const handlelogin = async () => {
         try {
-            const res = await axios.post("http://localhost:5050/login", form);
+
+            const res = await axios.post("https://zcoder-zac7.onrender.com/login", form);
+
             if (res.data.success === true) {
                 // Store the token in a secure manner
                 window.sessionStorage.setItem("token", res.data.token);
@@ -96,7 +98,7 @@ const login = () => {
                         </button>
                         <div className="w-full">
                             <p className="text-sm text-gray-500 text-center">
-                                Don't have an account?
+                                Do not have an account?
                             </p>
                             <Link href="/user/signup">
                                 <button
@@ -115,4 +117,5 @@ const login = () => {
     );
 };
 
-export default login;
+export default Login;
+
