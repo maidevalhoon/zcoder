@@ -3,7 +3,7 @@ const app = express();
 const {createServer}=require('http');
 const {Server}=require('socket.io')
 const cors=require('cors');
-const port =5050;
+const port =process.env.PORT || 10000;
 const connect = require('./config/database');
 const auth=require('./middleware/auth');
 //const userRouter=require('./routes/userRoute');
@@ -29,18 +29,16 @@ app.use(session({
     cookie: { secure: true }
 }));
 app.use(cors({
-    origin:'http://localhost:3000',
+    origin:['http://localhost:3000','https://zcoder-kappa.vercel.app'],
     credentials:true,
     methods:['GET', 'POST','PUT','DELETE'],
 }))
 //app.use('/api/user',userRouter);
 app.use('/api/room',roomRouter);
-
 app.use('/api/home',homeRouter);
 app.use('/api/problem',ask);
 app.use('/api/msg',msgRouter);
 // app.use(profile.app);
-
 app.use(home.app);
 // app.get('/status', verifyToken, (req, res) => {
 //     const user = users.find(u => u.id === req.userId);
@@ -68,7 +66,7 @@ server.listen(port,()=>{
     
 const io=new Server(server,{
     cors:{
-        origin:'http://localhost:3000',
+        origin:['http://localhost:3000','https://zcoder-kappa.vercel.app'],
         credentials:true,
         methods:['GET', 'POST','PUT','DELETE'],
     }
