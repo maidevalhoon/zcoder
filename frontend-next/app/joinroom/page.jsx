@@ -59,6 +59,7 @@ const JoinRoom = () => {
   }
   return (
     <React.Fragment>
+
       <div className='bg-black h-screen'>
     {status && <Alert className='fixed top-0' severity={status && status}>{status==='success'?"Room joined successfully! Redirecting...":"Error in joining the room!"}</Alert>}
     <Navbar/>
@@ -66,6 +67,7 @@ const JoinRoom = () => {
         <p className='text-3xl font-semibold '>Join Room</p>
         <p className='mt-2 font-medium mb-2'>Available Rooms:</p>
         <div className='w-full h-fit dark:bg-gray-800 bg-gray-200 border-stone-900 border dark:border-gray-300  rounded-lg p-4'>
+
           {roomList && roomList.map((room, ind) => (
             <div key={ind} className='room_display' style={{ 'marginBottom': '1rem' }}>
               <h3 className='font-medium'>{room.roomName.toUpperCase()} :</h3>
@@ -74,7 +76,9 @@ const JoinRoom = () => {
           ))}
         </div>
       </div>
+
   </div>
+
     </React.Fragment>
 
   )
