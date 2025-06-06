@@ -76,7 +76,7 @@ const SignUp = () => {
                 setPasswordMatch(false);
                 return;
             }
-            const res = await axios.post("https://zcoder-zac7.onrender.com/signup", form);
+            const res = await axios.post("http://localhost:5050/signup", form);
             if (res.data.success === true) {
                 setAlertOpt('success');
                 router.push("/user/login");

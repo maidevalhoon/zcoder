@@ -14,7 +14,7 @@ const JoinRoom = () => {
 
     const getAllrooms = async () => {
       try {
-        const res = await axios.get('https://zback-49lo.onrender.com/api/room/getallrooms');
+        const res = await axios.get('http://localhost:5050/api/room/getallrooms');
         setRoomList(res.data);
       } catch (err) {
         console.log(err);
@@ -25,7 +25,7 @@ const JoinRoom = () => {
     const getAuthUser = async () => {
       const token = window.sessionStorage.getItem('token');
       const instance = axios.create({
-          baseURL: 'https://zback-49lo.onrender.com/api',
+          baseURL: 'http://localhost:5050/api',
           withCredentials: true,
           headers: {
               'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ const JoinRoom = () => {
   const handleJoinRoom = async (room) => {
     console.log(room);
     try {
-      const res = await axios.post("https://zback-49lo.onrender.com/api/room/joinroom", { roomName:room.roomName, roomPassword:room.roomPassword,member:authUser._id });
+      const res = await axios.post("http://localhost:5050/api/room/joinroom", { roomName:room.roomName, roomPassword:room.roomPassword,member:authUser._id });
       console.log(res.data);
       setAlertStatus('success');
       window.location.href = `/room?id=${res.data._id}`

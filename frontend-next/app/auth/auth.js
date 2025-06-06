@@ -13,9 +13,7 @@ const auth = (Component) => {
         router.push("/user/login");
       } else {
         axios
-
-          .get("https://zcoder-zac7.onrender.com/api/getAuth", {
-
+          .get("http://localhost:5050/api/getAuth", {
             headers: {
                 'Authorization': `${token}`,
             },
@@ -27,9 +25,7 @@ const auth = (Component) => {
             router.push("/user/login");
           });
       }
-
     }, [router]);
-
 
     if (loading) {
       return (<h1>Loading...</h1>);

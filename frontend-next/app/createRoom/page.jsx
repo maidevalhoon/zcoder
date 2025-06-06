@@ -9,7 +9,7 @@ function CreateRoom() {
   const [alertStatus, setAlertStatus] = useState(null);
   const handleCreateRoom = async () => {
     try {
-      const res = await axios.post("https://zcoder-zac7.onrender.com/api/room/createroom", { roomName, roomPassword });
+      const res = await axios.post("http://localhost:5050/api/room/createroom", { roomName, roomPassword });
       console.log(res.data);
       setAlertStatus("success");
       setRoomName("");

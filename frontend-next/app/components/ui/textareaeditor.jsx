@@ -14,7 +14,7 @@ const Testareaanswer = ({_id}) => {
         const token = window.sessionStorage.getItem("token");
         try {
 
-            const res = await axios.get("https://zcoder-zac7.onrender.com/api/getAuth", {
+            const res = await axios.get("http://localhost:5050/api/getAuth", {
 
                 headers: {
                     'Authorization': `${token}`,
@@ -38,7 +38,7 @@ const Testareaanswer = ({_id}) => {
                 return;
             }
 
-            const res = await axios.post(`https://zcoder-zac7.onrender.com/api/problem/${_id}/answer`, addAnswer, {
+            const res = await axios.post(`http://localhost:5050/api/problem/${_id}/answer`, addAnswer, {
 
                 headers: {
                     'Authorization': `${token}`,
