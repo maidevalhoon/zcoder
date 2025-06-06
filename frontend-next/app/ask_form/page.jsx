@@ -17,7 +17,7 @@ export default function AskForm() {
         question: '',
         tags: ''
     });
-
+   
     const handleTagInput = (e) => {
         if (e.key === 'Enter' && e.target.value !== '') {
             if (tags.length < 5) {
@@ -61,7 +61,9 @@ export default function AskForm() {
         const token = window.sessionStorage.getItem("token");
         console.log(form);
         try {
+
             const res = await axios.post('http://localhost:5050/api/problem/ask', form, {
+
                 headers: {
                     'Authorization': `${token}`
                 }
@@ -80,8 +82,8 @@ export default function AskForm() {
     return (
         <>
         <Navbar />
-        <div className="px-10 py-5 bg-black text-white" >
-            <div className="heading text-3xl font-bold mb-3">Ask Question</div>
+        <div className="px-10 py-5 bg-gray-100 dark:bg-black dark:text-white" >
+            <div className="heading text-3xl font-bold mb-3 dark:text-white">Ask Question</div>
             <div className="question-title mb-6 mt-5">
                 <label htmlFor="default-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                     Question Title <span className="star text-red-600 text-sm">*</span>
@@ -93,7 +95,9 @@ export default function AskForm() {
                     onChange={(e) => setForm({ ...form, title: e.target.value })}
                 />
                 <label htmlFor="default-input" className="caution text-violet-400 text-small mt-1">
-                    Be specific and imagine you're asking a question to another person.
+
+                    Be specific and imagine you are asking a question to another person.
+
                 </label>
                 {warnings.title && <div className="text-red-500 text-xs font-semibold mt-1">{warnings.title}</div>}
             </div>

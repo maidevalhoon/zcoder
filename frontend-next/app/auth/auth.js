@@ -25,7 +25,7 @@ const auth = (Component) => {
             router.push("/user/login");
           });
       }
-    }, []);
+    }, [router]);
 
     if (loading) {
       return (<h1>Loading...</h1>);

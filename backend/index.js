@@ -1,9 +1,15 @@
+const dotenv = require('dotenv');
+const path = require('path');
+
+// Configure dotenv to use the .env file in the backend folder
+dotenv.config({ path: path.join(__dirname, '.env') });
+
 const express = require('express');
 const app = express();
 const {createServer}=require('http');
 const {Server}=require('socket.io')
 const cors=require('cors');
-const port =5050;
+const port =process.env.PORT || 10000;
 const connect = require('./config/database');
 const auth=require('./middleware/auth');
 //const userRouter=require('./routes/userRoute');
@@ -13,11 +19,9 @@ const msgRouter=require('./routes/msgRoute');
 const signup = require('./pages/signup/signup');
 const login = require('./pages/login/login');
 const home = require('./pages/home/home');
-const dotenv = require('dotenv');
 const passport = require("passport");
 const session = require('express-session');
 const middleware=require('./middleware/auth');
-dotenv.config();
 const profile = require('./pages/profile/profile');
 const ask = require('./pages/problem/problem')
 app.use(express.json());    
@@ -29,18 +33,16 @@ app.use(session({
     cookie: { secure: true }
 }));
 app.use(cors({
-    origin:'http://localhost:3000',
+    origin:['http://localhost:3000','https://zcoder-kappa.vercel.app'],
     credentials:true,
     methods:['GET', 'POST','PUT','DELETE'],
 }))
 //app.use('/api/user',userRouter);
 app.use('/api/room',roomRouter);
-
 app.use('/api/home',homeRouter);
 app.use('/api/problem',ask);
 app.use('/api/msg',msgRouter);
 // app.use(profile.app);
-
 app.use(home.app);
 // app.get('/status', verifyToken, (req, res) => {
 //     const user = users.find(u => u.id === req.userId);
@@ -57,6 +59,7 @@ app.get('/api/getAuth',middleware,(req,res)=>{
     }
 })
 connect();
+// console.log(process.env.MONGODB_URI);
 
 
 app.use(passport.initialize());
@@ -68,7 +71,7 @@ server.listen(port,()=>{
     
 const io=new Server(server,{
     cors:{
-        origin:'http://localhost:3000',
+        origin:['http://localhost:3000','https://zcoder-kappa.vercel.app'],
         credentials:true,
         methods:['GET', 'POST','PUT','DELETE'],
     }

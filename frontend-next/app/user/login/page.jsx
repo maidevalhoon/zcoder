@@ -7,7 +7,7 @@ import Link from 'next/link'
 import Cookies from "js-cookie";
 import { Alert } from "@mui/material";
 // import { cookies } from "next/headers";
-const login = () => {
+const Login = () => {
     const [form, setForm] = useState({
         email: "",
         password: "",
@@ -22,11 +22,10 @@ const login = () => {
         try {
 
             const res = await axios.post("http://localhost:5050/login", form);
-            if (res.data.success === true) {
 
+            if (res.data.success === true) {
                 // Store the token in a secure manner
                 window.sessionStorage.setItem("token", res.data.token);
-
                 router.push("/");
             } else {
                 setAlertOpt('error');
@@ -99,11 +98,9 @@ const login = () => {
                         </button>
                         <div className="w-full">
                             <p className="text-sm text-gray-500 text-center">
-                                Don't have an account?
+                                Do not have an account?
                             </p>
-
                             <Link href="/user/signup">
-
                                 <button
                                     className="button relative bg-orange-500 text-white font-bold w-full py-2 px-4 rounded-2xl border-black border-2 focus:outline-none focus:shadow-outline"
                                     type="button"
@@ -120,4 +117,5 @@ const login = () => {
     );
 };
 
-export default login;
+export default Login;
+
