@@ -13,7 +13,9 @@ const Home = () => {
             const token = window.sessionStorage.getItem("token");
             console.log(token);
 
-            await axios.get("https://zcoder-zac7.onrender.com/api/home", {
+
+            await axios.get("http://localhost:5050/api/home", {
+
 
                 headers: {
                     'Authorization': `${token}`,

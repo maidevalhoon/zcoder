@@ -1,3 +1,9 @@
+const dotenv = require('dotenv');
+const path = require('path');
+
+// Configure dotenv to use the .env file in the backend folder
+dotenv.config({ path: path.join(__dirname, '.env') });
+
 const express = require('express');
 const app = express();
 const {createServer}=require('http');
@@ -13,11 +19,9 @@ const msgRouter=require('./routes/msgRoute');
 const signup = require('./pages/signup/signup');
 const login = require('./pages/login/login');
 const home = require('./pages/home/home');
-const dotenv = require('dotenv');
 const passport = require("passport");
 const session = require('express-session');
 const middleware=require('./middleware/auth');
-dotenv.config();
 const profile = require('./pages/profile/profile');
 const ask = require('./pages/problem/problem')
 app.use(express.json());    
@@ -55,6 +59,7 @@ app.get('/api/getAuth',middleware,(req,res)=>{
     }
 })
 connect();
+// console.log(process.env.MONGODB_URI);
 
 
 app.use(passport.initialize());

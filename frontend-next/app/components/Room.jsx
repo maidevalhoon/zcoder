@@ -17,7 +17,9 @@ const Roomcomponent = () => {
     useEffect(() => {
         const getRoom = async () => {
             try {
-                const res = await axios.get(`https://zcoder-zac7.onrender.com/api/room/getroombyid?q=${id}`);
+
+                const res = await axios.get(`http://localhost:5050/api/room/getroombyid?q=${id}`);
+
                 console.log(res.data);
                 setmsgList(res.data.message);
                 setRoom(res.data);
@@ -31,7 +33,9 @@ const Roomcomponent = () => {
             const token = window.sessionStorage.getItem('token');
             // console.log(token);
             const instance = axios.create({
-                baseURL: 'https://zcoder-zac7.onrender.com/api',
+
+                baseURL: 'http://localhost:5050/api',
+
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json',
@@ -51,7 +55,9 @@ const Roomcomponent = () => {
     }, [id]);
 
     const socket = useMemo(() => {
-        return io("https://zcoder-zac7.onrender.com", {
+
+        return io("http://localhost:5050", {
+
             withCredentials: true,
         });
     }, []);
@@ -78,7 +84,9 @@ const Roomcomponent = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('https://zcoder-zac7.onrender.com/api/msg/postmessage', { content: postmsg, roomId: id, sender: authUser._id });
+
+            const res = await axios.post('http://localhost:5050/api/msg/postmessage', { content: postmsg, roomId: id, sender: authUser._id });
+
             setmsgList((prev) => [...prev, res.data]);
             // console.log(res.data);
             socket.emit('newmessage', { msg: res.data, id });
