@@ -14,7 +14,7 @@ const auth = (Component) => {
       } else {
         axios
 
-          .get("https://zcoder-zac7.onrender.com/api/getAuth", {
+          .get("http://localhost:5050/api/getAuth", {
 
             headers: {
                 'Authorization': `${token}`,
