@@ -1,5 +1,5 @@
 "use client";
-
+ 
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 
@@ -16,7 +16,9 @@ const JoinRoom = () => {
     const getAllrooms = async () => {
       try {
 
+
         const res = await axios.get('http://localhost:5050/api/room/getallrooms');
+
 
         setRoomList(res.data);
       } catch (err) {
@@ -29,7 +31,7 @@ const JoinRoom = () => {
     const getAuthUser = async () => {
       const token = window.sessionStorage.getItem('token');
       const instance = axios.create({
-          baseURL: 'http://localhost:5050/api',
+          baseURL: 'https://zback-49lo.onrender.com/api',
           withCredentials: true,
           headers: {
               'Content-Type': 'application/json',
@@ -52,7 +54,7 @@ const JoinRoom = () => {
   const handleJoinRoom = async (room) => {
     console.log(room);
     try {
-      const res = await axios.post("http://localhost:5050/api/room/joinroom", { roomName:room.roomName, roomPassword:room.roomPassword,member:authUser._id });
+      const res = await axios.post("https://zback-49lo.onrender.com/api/room/joinroom", { roomName:room.roomName, roomPassword:room.roomPassword,member:authUser._id });
       console.log(res.data);
       setAlertStatus('success');
       window.location.href = `/room?id=${res.data._id}`
@@ -66,19 +68,24 @@ const JoinRoom = () => {
   return (
     <React.Fragment>
 
+
     {status && <Alert className='fixed top-0' severity={status && status}>{status==='success'?"Room joined successfully! Redirecting...":"Error in joining the room!"}</Alert>}
       <div className='bg-black p-4 text-white w-full h-screen'>
         <p className='text-2xl'>Zcoder</p>
         <p className='mt-2'>Available Rooms:</p>
         <div className='w-full h-fit bg-slate-700 rounded-lg p-4'>
+
+ 
           {roomList && roomList.map((room, ind) => (
             <div key={ind} className='room_display' style={{ 'marginBottom': '1rem' }}>
-              <h3>{room.roomName.toUpperCase()}</h3>
-              <button className='bg-green-600 px-2 py-1 rounded-md w-fit h-fit' onClick={() => handleJoinRoom(room)}>Join Room</button>
+              <h3 className='font-medium'>{room.roomName.toUpperCase()} :</h3>
+              <button type="button" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center me-2 mb-2 w-fit h-fit"onClick={() => handleJoinRoom(room)}>Join Room</button>
             </div>
           ))}
         </div>
       </div>
+
+
 
 
     </React.Fragment>
