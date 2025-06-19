@@ -13,7 +13,7 @@ const auth = (Component) => {
         router.push("/user/login");
       } else {
         axios
-          .get("http://localhost:5050/api/getAuth", {
+          .get("NEXT_PUBLIC_API_URL/api/getAuth", {
             headers: {
                 'Authorization': `${token}`,
             },
