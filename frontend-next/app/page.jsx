@@ -13,7 +13,7 @@ const Home = () => {
             const token = window.sessionStorage.getItem("token");
             console.log(token);
 
-            await axios.get("NEXT_PUBLIC_API_URL/api/home", {
+            await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/home`, {
 
                 headers: {
                     'Authorization': `${token}`,

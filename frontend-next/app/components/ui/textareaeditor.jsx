@@ -14,7 +14,7 @@ const Testareaanswer = ({_id}) => {
         const token = window.sessionStorage.getItem("token");
         try {
 
-            const res = await axios.get("NEXT_PUBLIC_API_URL/api/getAuth", {
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/getAuth`, {
 
                 headers: {
                     'Authorization': `${token}`,
@@ -38,7 +38,7 @@ const Testareaanswer = ({_id}) => {
                 return;
             }
 
-            const res = await axios.post(`NEXT_PUBLIC_API_URL/api/problem/${_id}/answer`, addAnswer, {
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/${_id}/answer`, addAnswer, {
 
                 headers: {
                     'Authorization': `${token}`,

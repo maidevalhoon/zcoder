@@ -76,7 +76,7 @@ const SignUp = () => {
                 setPasswordMatch(false);
                 return;
             }
-            const res = await axios.post("NEXT_PUBLIC_API_URL/signup", form);
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/signup`, form);
             if (res.data.success === true) {
                 setAlertOpt('success');
                 router.push("/user/login");
