@@ -62,7 +62,7 @@ export default function AskForm() {
         console.log(form);
         try {
 
-            const res = await axios.post('http://localhost:5050/api/problem/ask', form, {
+            const res = await axios.post('NEXT_PUBLIC_API_URL/api/problem/ask', form, {
 
                 headers: {
                     'Authorization': `${token}`

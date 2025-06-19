@@ -21,7 +21,7 @@ const Login = () => {
     const handlelogin = async () => {
         try {
 
-            const res = await axios.post("http://localhost:5050/login", form);
+            const res = await axios.post("NEXT_PUBLIC_API_URL/login", form);
 
             if (res.data.success === true) {
                 // Store the token in a secure manner
