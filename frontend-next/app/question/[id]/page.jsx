@@ -16,7 +16,7 @@ const QuestionPage = ({ params }) => {
         const fetchQuestion = async () => {
             const token = window.sessionStorage.getItem("token");
             try {
-                const response = await axios.get(`NEXT_PUBLIC_API_URL/api/problem/${_id}`, {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/problem/${_id}`, {
 
                     headers: {
                         'Authorization': `${token}`,

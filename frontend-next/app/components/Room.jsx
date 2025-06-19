@@ -17,7 +17,7 @@ const Roomcomponent = () => {
     useEffect(() => {
         const getRoom = async () => {
             try {
-                const res = await axios.get(`NEXT_PUBLIC_API_URL/api/room/getroombyid?q=${id}`);
+                const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/room/getroombyid?q=${id}`);
                 console.log(res.data);
                 setmsgList(res.data.message);
                 setRoom(res.data);
@@ -31,7 +31,7 @@ const Roomcomponent = () => {
             const token = window.sessionStorage.getItem('token');
             // console.log(token);
             const instance = axios.create({
-                baseURL: 'NEXT_PUBLIC_API_URL/api',
+                baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api`,
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ const Roomcomponent = () => {
     }, [id]);
 
     const socket = useMemo(() => {
-        return io("NEXT_PUBLIC_API_URL", {
+        return io(process.env.NEXT_PUBLIC_API_URL, {
             withCredentials: true,
         });
     }, []);
@@ -78,7 +78,7 @@ const Roomcomponent = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('NEXT_PUBLIC_API_URL/api/msg/postmessage', { content: postmsg, roomId: id, sender: authUser._id });
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/msg/postmessage`, { content: postmsg, roomId: id, sender: authUser._id });
             setmsgList((prev) => [...prev, res.data]);
             // console.log(res.data);
             socket.emit('newmessage', { msg: res.data, id });

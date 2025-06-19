@@ -13,7 +13,7 @@ const auth = (Component) => {
         router.push("/user/login");
       } else {
         axios
-          .get("NEXT_PUBLIC_API_URL/api/getAuth", {
+          .get(`${process.env.NEXT_PUBLIC_API_URL}/api/getAuth`, {
             headers: {
                 'Authorization': `${token}`,
             },

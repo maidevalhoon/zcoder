@@ -9,7 +9,7 @@ function CreateRoom() {
   const [alertStatus, setAlertStatus] = useState(null);
   const handleCreateRoom = async () => {
     try {
-      const res = await axios.post("NEXT_PUBLIC_API_URL/api/room/createroom", { roomName, roomPassword });
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/room/createroom`, { roomName, roomPassword });
       console.log(res.data);
       setAlertStatus("success");
       setRoomName("");
