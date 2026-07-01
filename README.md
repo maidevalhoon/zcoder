@@ -1,4 +1,4 @@
-Welcome to Zcoder app
+Welcome to Zcoder app.
 How to setup the project?
 <br>
 1.) Clone the Repo
